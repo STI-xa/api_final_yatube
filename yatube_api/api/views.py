@@ -42,15 +42,21 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user, post=post)
 
 
-class FollowViewSet(ListModelMixin, CreateModelMixin, viewsets.GenericViewSet):
+class CreateAndListViewset(
+    ListModelMixin, CreateModelMixin, viewsets.GenericViewSet
+):
+
+    pass
+
+
+class FollowViewSet(CreateAndListViewset):
     serializer_class = FollowSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
 
     def get_queryset(self):
-        user = self.request.user
-        return user.follower.all()
+        return self.request.user.follower.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
