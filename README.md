@@ -41,14 +41,49 @@ python manage.py migrate
 python manage.py runserver
 ```
 ___
-### **Примеры**:
-Примеры запросов можно посмотреть по ссылке:
+### **Примеры запросов**:
+* GET-запрос возвращает список постов:
+```
+http://127.0.0.1:8000/api/v1/posts/
+```
+```
+{
+  "count": 123,
+  "next": "http://api.example.org/accounts/?offset=400&limit=100",
+  "previous": "http://api.example.org/accounts/?offset=200&limit=100",
+  "results": [
+    {
+      "id": 0,
+      "author": "string",
+      "text": "string",
+      "pub_date": "2021-10-14T20:41:29.648Z",
+      "image": "string",
+      "group": 0
+    }
+  ]
+}
+```
+* GET-запрос возвращает комментарии к посту:
+```
+* http://127.0.0.1:8000/api/v1/posts/{post_id}/comments/
+```
+```
+[
+  {
+    "id": 0,
+    "author": "string",
+    "text": "string",
+    "created": "2019-08-24T14:15:22Z",
+    "post": 0
+  }
+]
+```
+* Остальные примеры запросов можно посмотреть по ссылке:
 
 http://127.0.0.1:8000/redoc/
 ___
 ### **Стэк технологий**:
-* Python 3.7.9
-* Django 3.2.16
-* Django REST framework
-* Djoser
-* Simple JWT
+* ![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+* ![image](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+* ![image](https://img.shields.io/badge/django%20rest-ff1709?style=for-the-badge&logo=django&logoColor=white)
+* ![image](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
